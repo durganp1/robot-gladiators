@@ -23,7 +23,12 @@ var confirmSkip=window.confirm("Are you sure you'd like to quit?");
 }
 
 var fight = function(enemy) {
+var isPlayerTurn=true;
+    if(Math.random()>0.5){
+        isPlayerTurn=false;
+    }
     while(enemy.health>0&&playerInfo.health>0){ 
+    if(isPlayerTurn){
     if (fightOrSkip()){
         break;
     }
@@ -42,6 +47,7 @@ var damage=randomNumber(playerInfo.attack-3,playerInfo.attack);
     }else{
         window.alert(enemy.name+" still has "+enemy.health+" health left.");
     }
+}else{
     // Enemy attacks Player Robot
 var damage=randomNumber(enemy.attack-3,enemy.attack);
     playerInfo.health=Math.max(0,playerInfo.health-damage);
@@ -56,6 +62,8 @@ var damage=randomNumber(enemy.attack-3,enemy.attack);
     }else{
         window.alert(playerInfo.name+" still has "+playerInfo.health+" health left.");
     }
+}
+isPlayerTurn=!isPlayerTurn;
 }
 };
 var startGame = function(){
