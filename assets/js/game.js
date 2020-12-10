@@ -46,7 +46,7 @@ var fight = function(enemy) {
             } else {
                 window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
             }
-            
+
         } else {
 
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
@@ -92,6 +92,20 @@ var startGame = function() {
 };
 
 var endGame = function() {
+    window.alert('The game has now ended.  Let us see how you did!');
+
+    var highScore = localStorage.getItem('highscore');
+    highScore = highScore || 0;
+
+    if (playerInfo.money > highScore) {
+        localStorage.setItem('highscore', playerInfo.money);
+        localStorage.setItem('name', playerInfo.name);
+
+        alert(playerInfo.name + ' now has the high score of ' + playerInfo.money + '!');
+    } else {
+        alert(playerInfo.name + ' did not beat the high score of ' + highScore + '. Maybe next time!');
+    }
+
     if (playerInfo.health > 0) {
         window.alert("Great Job, you have survived the game! You have a score of " + playerInfo.money + '.');
     } else {
@@ -145,12 +159,12 @@ var getPlayerName = function() {
 var playerInfo = {
     name: getPlayerName(),
     health: 100,
-    attack: 10,
+    attack: 12,
     money: 10,
     reset: function() {
         this.health = 100;
         this.money = 10;
-        this.attack = 10;
+        this.attack = 12;
     },
     refillHealth: function() {
         if (this.money >= 7) {
