@@ -24,11 +24,16 @@ var fightOrSkip = function() {
 }
 
 var fight = function(enemy) {
-    
+    var isPlayerTurn = true;
+    if (Math.random() > .5) {
+        isPlayerTurn = false;
+    }
     while(enemy.health > 0 && playerInfo.health > 0) {
+        if(isPlayerTurn) {
             if (fightOrSkip()) {
                 break;
             }
+        
             var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
             enemy.health = Math.max(0, enemy.health - damage);
             console.log(playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.');
@@ -41,6 +46,8 @@ var fight = function(enemy) {
             } else {
                 window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
             }
+            
+        } else {
 
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
             playerInfo.health = Math.max(0, playerInfo.health - damage);
@@ -52,6 +59,8 @@ var fight = function(enemy) {
             } else {
                 window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
             }
+        }
+        isPlayerTurn = !isPlayerTurn;
     }
 };
 
